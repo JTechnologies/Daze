@@ -64,23 +64,23 @@ def toHtml(input):
 </body>
 </html>""")
 
-if sys.argv[1]:
+if len(sys.argv)>2:
     if sys.argv[1]=="compile":
-        if sys.argv[2] and sys.argv[3]:
+        if len(sys.argv)==4:
             inFile = sys.argv[2]
             outFile = sys.argv[3]
             with open(inFile,'r') as i:
                 lines = i.read()
                 with open(outFile,'w') as o:
                     o.write(toHtml(lines))
-        elif sys.argv[2] and sys.argv[3] and sys.argv[4]:
+        elif len(sys.argv)>4:
             print("daze: Too many arguments")
-        elif sys.argv[2] and not sys.argv[3]:
+        elif len(sys.argv)==3:
             print("daze: No output file specified")
-        elif not sys.argv[2]:
+        elif len(sys.argv)==2:
             print("daze: No input file specified")
         else:
-            print("daze: No input file provided")
+            print("daze: Internal Error 0x01")
     elif sys.argv[1]=="help":
         print("""
         Daze: A declarative programing language
@@ -89,6 +89,6 @@ if sys.argv[1]:
         help: Shows this help message
         """)
     else:
-        print(f"daze: invalid command {sys.argv[0]}. Try 'daze help' to see available commands.")
+        print(f"daze: invalid command {sys.argv[1]}. Try 'daze help' to see available commands.")
 else:
     print("daze: no command. Try 'daze help' to see available commands.")
