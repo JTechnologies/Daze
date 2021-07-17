@@ -64,7 +64,7 @@ def toHtml(input):
 </body>
 </html>""")
 
-if len(sys.argv)>2:
+if len(sys.argv)>=2:
     if sys.argv[1]=="compile":
         if len(sys.argv)==4:
             inFile = sys.argv[2]
