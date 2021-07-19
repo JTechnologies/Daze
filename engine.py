@@ -52,7 +52,20 @@ def toHtml(input, outputPart="full"):
       strAttributes=""
       for i in attributes.keys():
           strAttributes=strAttributes+f' {i}="{attributes[i][1:-1]}"'
-      bodyhtml=bodyhtml+f'<{element[0]}{strAttributes}>{contents}</{element[0]}>\n'
+      if element[0]=="img":
+        bodyhtml=bodyhtml+f'<img src="{contents}" {strAttributes}>\n'
+      elif element[0]=="linkScript":
+        bodyhtml=bodyhtml+f'<script src="{contents}" {strAttributes}></script>\n'
+      elif element[0]=="linkStyle":
+        bodyhtml=bodyhtml+f'<link rel="stylesheet" href="{contents}" {strAttributes}>\n'
+      elif element[0]=="link":
+        bodyhtml=bodyhtml+f'<link href="{contents}" {strAttributes}>\n'
+      elif element[0]=="script":
+        bodyhtml=bodyhtml+f'<script {strAttributes}>\n{contents}\n</script>\n'
+      elif element[0]=="style":
+        bodyhtml=bodyhtml+f'<style {strAttributes}>\n{contents}\n</style>\n'
+      else:
+        bodyhtml=bodyhtml+f'<{element[0]}{strAttributes}>{contents}</{element[0]}>\n'
   if outputPart=="full":
       return(f"""<!DOCTYPE html>
 <html>
@@ -68,21 +81,24 @@ def toHtml(input, outputPart="full"):
 </body>
 </html>""")
   elif outputPart=="head":
-      return(f"""<head>
-<!-- Part compiled from Daze -->
+      return(f"""<!-- Part compiled from Daze -->
 {metahtml}
-</head>
+<!-- End of Part -->
 """)
   elif outputPart=="body":
       return(f"""<body>
 <!-- Part compiled from Daze -->
 {bodyhtml}
-</body>
+<!-- End of Part -->
 """)
 
-print(toHtml("""$variables
-+%title="Daze Test"
-+!lang="Daze"
-## This is a test of Comments
-$content
-(h1: "Testing! This was written in !lang !")"""))
+#print(toHtml("""$variables
+#+%title="Daze Test"
+#+!lang="Daze"
+### This is a test of Comments
+#$content
+#(h1: "Testing! This was written in !lang !")"""))
+print(toHtml("""$content
+(style: 'h1{
+color:red;
+}')"""))
