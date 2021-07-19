@@ -1,16 +1,20 @@
 # Changelog
 ## v0.2.0a
 ### Changes
-- Add new option to output partial html to the engine
-- Allow setting variables to variables
-- Merge `meta` and `variables` section and change the meta configuration.
+- [x] Add new option to output partial html to the engine
+- [ ] Allow setting variables to variables
+- [x] Merge `meta` and `variables` section and change the meta configuration.
+- [x] Add comment support (see language changes)
+- [ ] Add support for `(img)` tags
+- [ ] Add support for JavaScript
+- [ ] Add support for CSS
 ### Known Errors
 *none*
 ### Fixed Errors
 *none*
 ### Language Changes
 - Declaring a variable is now done with `+!`
-- Metatags can now be set to variables
+- Metavariables may be set to variables
 - Variables may be set to other variables
 - Declaring a metavariable is now done with `+%`
 - Tags must now have quotes surrounding the content, making `(h1: Hi)` `(h1: "Hi")`
