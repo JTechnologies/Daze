@@ -10,7 +10,6 @@ def toHtml(input, outputPart="full"):
   for i in range(len(head)):
       head[i]=head[i].strip("\n")
   head.pop(0)
-  print(head)
   variables={}
   metaVariables={}
   for i in range(len(head)):
@@ -21,9 +20,8 @@ def toHtml(input, outputPart="full"):
     elif head[i][0]=="~" and head[i][1]=="c":
       print(f"Comment at line {i+2}: '{head[i][2::]}'")
     else:
-      print("!! Daze Syntax Error: Invalid Character in $variables")
+      print(f"!! Daze Syntax Error: Invalid Character in $variables at line {i+2}")
   metahtml=""
-  print(metaVariables)
   for i in range(len(metaVariables)):
       if list(metaVariables)[i]=="title":
           metahtml=metahtml+f'<title>{metaVariables[list(metaVariables)[i]][1:-1]}</title>\n'
