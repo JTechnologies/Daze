@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import sys
 import os
-#!/usr/bin/env python
 def toHtml(input, outputPart="full"):
   top=input.split("$content")[0]
   head=top.split("$meta")[0].strip('$variables')
