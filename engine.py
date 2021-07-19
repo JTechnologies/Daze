@@ -22,6 +22,30 @@ def toHtml(input, outputPart="full"):
     else:
       print(f"!! Daze Syntax Error: Invalid Character in $variables at line {i+2}")
   metahtml=""
+  for i in list(variables):
+    contents=variables[i]
+    for j in variables.keys():
+      if variables[j][0]=="'"or variables[j][0]=='"':
+        contents=contents.replace(f"!{j} ",variables[j][1:-1])
+      else:
+        contents=contents.replace(f"!{j} ",variables[j])
+    variables[i]=contents
+  for i in list(metaVariables):
+    contents=metaVariables[i]
+    for j in metaVariables.keys():
+      if metaVariables[j][0]=="'"or metaVariables[j][0]=='"':
+        contents=contents.replace(f"%{j} ",metaVariables[j][1:-1])
+      else:
+        contents=contents.replace(f"%{j} ",metaVariables[j])
+    metaVariables[i]=contents
+  for i in list(metaVariables):
+    contents=metaVariables[i]
+    for j in variables.keys():
+      if variables[j][0]=="'"or variables[j][0]=='"':
+        contents=contents.replace(f"!{j} ",variables[j][1:-1])
+      else:
+        contents=contents.replace(f"!{j} ",variables[j])
+    metaVariables[i]=contents
   for i in range(len(metaVariables)):
       if list(metaVariables)[i]=="title":
           metahtml=metahtml+f'<title>{metaVariables[list(metaVariables)[i]][1:-1]}</title>\n'
@@ -91,14 +115,3 @@ def toHtml(input, outputPart="full"):
 {bodyhtml}
 <!-- End of Part -->
 """)
-
-#print(toHtml("""$variables
-#+%title="Daze Test"
-#+!lang="Daze"
-### This is a test of Comments
-#$content
-#(h1: "Testing! This was written in !lang !")"""))
-print(toHtml("""$content
-(style: 'h1{
-color:red;
-}')"""))

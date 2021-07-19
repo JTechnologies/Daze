@@ -2,14 +2,14 @@
 ## v0.2.0a
 ### Changes
 - [x] Add new option to output partial html to the engine
-- [ ] Allow setting variables to variables
+- [x] Allow setting variables to variables
 - [x] Merge `meta` and `variables` section and change the meta configuration.
 - [x] Add comment support (see language changes)
 - [x] Add support for `(img)` tags
 - [x] Add support for JavaScript
 - [x] Add support for CSS
 ### Known Errors
-- div elements do not work.
+- div elements do not work. This should be fixed by v0.4.0
 ### Fixed Errors
 *none*
 ### Language Changes
