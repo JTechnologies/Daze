@@ -2,7 +2,7 @@
 import sys
 import os
 #!/usr/bin/env python
-def toHtml(input):
+def toHtml(input, outputPart="full"):
   top=input.split("$content")[0]
   head=top.split("$meta")[0].strip('$variables')
   meta=top.split("$meta")[1]
@@ -50,7 +50,8 @@ def toHtml(input):
       for i in attributes.keys():
           strAttributes=strAttributes+f' {i}="{attributes[i][1:-1]}"'
       bodyhtml=bodyhtml+f'<{element[0]}{strAttributes}>{contents}</{element[0]}>\n'
-  return(f"""<!DOCTYPE html>
+  if outputPart=="full":
+      return(f"""<!DOCTYPE html>
 <html>
 
 <!-- Site compiled from Daze -->
@@ -63,7 +64,23 @@ def toHtml(input):
 {bodyhtml}
 </body>
 </html>""")
-
+  elif outputPart=="head":
+      return(f"""<head>
+<!-- Part compiled from Daze -->
+{metahtml}
+</head>
+""")
+  elif outputPart=="body":
+      return(f"""<body>
+<!-- Part compiled from Daze -->
+{bodyhtml}
+</body>
+""")
+  elif outputPart=="open":
+      return(f"""
+      <!-- Part compiled from Daze -->
+      {bodyhtml}
+      <!-- End Part -->""")
 if len(sys.argv)>=2:
     if sys.argv[1]=="compile":
         if len(sys.argv)==4:
